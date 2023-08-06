@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="ru">
+    <head>
+        <meta charset="utf-8">
+        <title>Log Check</title>
+        <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
+    </head>
+    <body>
+        <input type="text" placeholder="Enter email" id="email" />
+        <input type="submit" value="Check" id="submit" />
+        <span id="morethan100" style="color: red;"></span>
+        <br />
+        <textarea id="logs" wrap="off" style="width: 1000px; height: 600px; overflow: auto;"></textarea>
+        <script>
+            $('#submit').click(function() {
+                var email = $.trim($('#email').val());
+                if (email)
+                    $.getJSON('http://127.0.0.1/cgi-bin/web.pl',
+                        { email: email },
+                        function(data) {
+                            var log_text = '';
+                            for (var rec in data['data']) {
+                                log_text += data['data'][rec] +"\n";
+                            }
+                            $('#logs').val(log_text);
+                            if (data['all_count'] > 100)
+                                $('#morethan100').text('More than 100 ('+ data['all_count'] +')');
+                            else
+                                $('#morethan100').text('');
+                        }
+                    );
+                else
+                    alert('Enter email')
+            });
+        </script>
+    </body>
+</html>

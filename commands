@@ -1,0 +1,6 @@
+# https://techexpert.tips/nginx/perl-cgi-nginx/
+apt install libdbd-pg-perl
+perl -MCPAN -e 'install Bundle::DBI'
+perl -MCPAN -e 'install Email::Valid'
+perl -MCPAN -e 'install Data::Dumper'
+perl -MCPAN -e 'install CGI'
